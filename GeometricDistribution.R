@@ -4,7 +4,7 @@ open(f)
 d <- strsplit(readLines(f, warn=FALSE), split=" ")
 first_defect_after<-as.numeric(d[[2]])-1
 ratio<-array(as.numeric(d[[1]]), dim=length(d[[1]]))
-cat(round(dgeom(first_defect_after,ratio[1]/ratio[2]),digits=3),'\n')
+cat(format(round(dgeom(first_defect_after,ratio[1]/ratio[2]),digits=3), nsmall=1),'\n')
 
 #Geometric Distribution II
 f <- file("stdin")
