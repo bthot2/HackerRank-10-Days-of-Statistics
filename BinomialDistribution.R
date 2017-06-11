@@ -1,12 +1,10 @@
 #Binomial Distribution I
-boy<-readline(prompt="Enter boy's ratio")
-boy<-as.double(boy)
-girl<-readline(prompt="Enter girl's ratio")
-girl<-as.double(girl)
-p<-boy/(boy+girl)
-binom=0.0
+d <- as.numeric(unlist(strsplit(readLines(file("stdin"), warn=FALSE), split=" ")))
+p<-d[1]/(d[1]+d[2])
+binom<-0
 for(i in 3:6)
   binom<-binom+dbinom(x=i,size = 6,prob=p, log=FALSE)
+cat(format(round(binom, digits=3), nsmall=1), '\n')
 
 #Binomial Distribution II
 d <- strsplit(readLines(file('stdin'), warn=FALSE), split=" ")
