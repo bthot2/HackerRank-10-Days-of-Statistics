@@ -1,7 +1,7 @@
 #Poisson DistributionI
 d <- strsplit(readLines(file('stdin'), warn=FALSE), split=" ")
 d<-t(as.numeric(unlist(d)))
-cat(format(round(dpois(lamda=d[1], d[2]), digits=3), nsmall=1), "\n")
+cat(format(round(dpois(d[2], d[1]), digits=3), nsmall=1), "\n")
 
 #Poisson DistributionII
 d <- strsplit(readLines(file('stdin'), warn=FALSE), split=" ")
