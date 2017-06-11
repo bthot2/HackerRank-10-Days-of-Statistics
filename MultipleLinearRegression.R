@@ -1,14 +1,16 @@
-data<-read.csv("input", sep=" ", header=FALSE)
-n=data[1,2]
-x1=as.data.frame(data[2:n,])
-predict1<-as.matrix(data[n+2:dim(data)[1],1:2], nrow=2, ncol=2)
-multiple_model=lm(x1$V3~x1$V1+x1$V2)
-intercept=multiple_model$coefficients[1]
-x1_coeff=multiple_model$coefficients[2]
-x2_coeff=multiple_model$coefficients[3]
-output<-apply(X = predict1, FUN = function(x){
-  +     intercept+(x[1]*x1_coeff)+(x2_coeff*x[2])}, MARGIN = c(1))
-for(i in na.omit(output)){
-  if(i!="NA")
-    cat(round(i, 3), "\n")
-}
+data<- scan("/dev/stdin")
+m <- data[1]
+n <- data[2]
+q <- data[(m+1)*n+3]
+
+training <- matrix(data[c(3:(n*(m+1)+2))],nrow = n, ncol = (m+1),byrow = T)
+new <- matrix(data[c(((m+1)*n+4):length(data))], nrow = q, ncol = m,byrow = T)
+
+y <- training[,(m+1)]
+x <- training[,1:m]
+model <- lm (formula=y~x)
+b <- matrix(coef(model),byrow=F)
+a <- matrix(1, nrow = q, ncol =1)
+newdata <- cbind(a,new)
+out <- newdata %*% b  
+cat(round(out,2),sep = '\n')
